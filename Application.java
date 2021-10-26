@@ -41,6 +41,9 @@ public class Application {
 				+ "Platform: " + getPlatform() + "/n";
 	}
 	
+	public boolean equals(Application a) {
+		return this.name == a.getName();
+	}
 	public String getName() {
 		return name;
 	}
