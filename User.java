@@ -28,21 +28,26 @@ public class User {
 	            while (true) {
     	            System.out.print("Choose Result Number: ");
     	            String choice = input.next();
-    	            int choiceNum = Integer.parseInt(choice);
-    	            if (choiceNum <= 0 || choiceNum > output.size()) {
-    	            	System.out.println("_______________________\n");
-	            		System.out.print("No such result number.\n");
-	            		System.out.println("_______________________\n");
-	            		continue;
-	            	}
+    	            
+    	            
     	            try {
+    	                int choiceNum = Integer.parseInt(choice);
     	                if (choiceNum > 0 && choiceNum <= output.size()) {
                             System.out.println("_______________________\n");
-                            System.out.println(output.get(choiceNum-1).getDescription());
+                            System.out.println(output.get(choiceNum-1));
                             System.out.println("_______________________\n");
                             break;
+                        } else {
+                            System.out.println("_______________________\n");
+                            System.out.print("No such result number.\n");
+                            System.out.println("_______________________\n");
+                            continue;
                         }
     	            } catch (Exception e) {
+    	                System.out.println("_______________________\n");
+                        System.out.print("Input must be a number.\n");
+                        System.out.println("_______________________\n");
+                        continue;
     	            }
     	        }
 	            break;

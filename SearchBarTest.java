@@ -1,7 +1,4 @@
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
-
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -62,6 +59,12 @@ class SearchBarTest {
         Assert.assertEquals(result.size(), empty.length);
         Assert.assertEquals(result.size(), 0);
         
+        // No results with multiple words
+        // Test with "1000 candy" -- should be no results (0)
+        result = SearchBar.search(appArray, "1000 candy");
+        Assert.assertEquals(result.size(), empty.length);
+        Assert.assertEquals(result.size(), 0);
+        
         // Not case sensitive
         // Test with "mood tracker" -- should be Mood Tracker (1)
         result = SearchBar.search(appArray, "mood tracker");
@@ -77,6 +80,15 @@ class SearchBarTest {
         Assert.assertEquals(result.get(0), appArrayTree[0]);
         Assert.assertEquals(result.size(), appArrayTree.length);
         Assert.assertEquals(result.size(), 1);
+        
+        // With multiple words, display results of each word
+        // Test with "slide mood tiger food" -- should be Mood Tracker and Food Ordering (2)
+        result = SearchBar.search(appArray, "slide mood tiger food");
+        Assert.assertEquals(result.get(0).getName(), appArrayOod[0].getName());
+        Assert.assertEquals(result.get(0), appArrayOod[0]);
+        Assert.assertEquals(result.get(1), appArrayOod[1]);
+        Assert.assertEquals(result.size(), appArrayOod.length);
+        Assert.assertEquals(result.size(), 2);
         
     }
 

@@ -31,7 +31,38 @@ public class Application {
 		this.price = price;
 		this.platform = platform;
 	}
-	
+
+    @Override
+    public String toString() {
+        String result = "Name: " + getName()
+                + "\nOrganization: " + getOrganization()
+                + "\nVersion: " + getVersion()
+                + "\nExternal Link: " + getExternalLink()
+                + "\nDescription: " + getDescription()
+                + "\nPrice: $" + getPrice()
+                + "\nPlatform: " + getPlatform();
+        return result;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Application)) {
+            return false;
+        }
+        Application a = (Application)o;
+        return (this.name.toUpperCase().equals(a.getName().toUpperCase())
+             && this.organization.toUpperCase().equals(a.getOrganization().toUpperCase())
+             && this.version.toUpperCase().equals(a.getVersion().toUpperCase())
+             && this.externalLink.toUpperCase().equals(a.getExternalLink().toUpperCase())
+             && this.description.toUpperCase().equals(a.getDescription().toUpperCase())
+             && this.price == a.getPrice()
+             && this.platform.toUpperCase().equals(a.getPlatform().toUpperCase()));
+    }
+    public boolean equals(String a) {
+        return this.name.toUpperCase().equals(a.toUpperCase());
+    }
 	public String display() {
 		if (price == 0) {
 			return getName() + "\n" 
@@ -41,7 +72,7 @@ public class Application {
 		}
         else 
         	return  getName() + "\n" 
-        			+ getOrganization() + "\n" 
+        			+ getOrganization() + "\n$" 
         			+ getPrice() + "\n" 
         			+ getPlatform() + "\n" ;
 	}
