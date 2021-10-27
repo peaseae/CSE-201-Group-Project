@@ -42,6 +42,23 @@ public class Application {
 				+ "\nPlatform: " + getPlatform();
 	    return result;
 	}
+	@Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Application)) {
+            return false;
+        }
+        Application a = (Application)o;
+        return (this.name.toUpperCase().equals(a.getName().toUpperCase())
+             && this.organization.toUpperCase().equals(a.getOrganization().toUpperCase())
+             && this.version.toUpperCase().equals(a.getVersion().toUpperCase())
+             && this.externalLink.toUpperCase().equals(a.getExternalLink().toUpperCase())
+             && this.description.toUpperCase().equals(a.getDescription().toUpperCase())
+             && this.price == a.getPrice()
+             && this.platform.toUpperCase().equals(a.getPlatform().toUpperCase()));
+    }
 	public boolean equals(Application a) {
         	return this.name.toUpperCase() == a.getName().toUpperCase();
     }
