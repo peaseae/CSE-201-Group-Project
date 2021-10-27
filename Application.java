@@ -43,7 +43,7 @@ public class Application {
 	    return result;
 	}
 	public boolean equals(Application a) {
-        return this.name.toUpperCase() == a.getName().toUpperCase();
+        	return this.name.toUpperCase() == a.getName().toUpperCase();
     }
     public boolean equals(String a) {
         return this.name.toUpperCase().equals(a.toUpperCase());
