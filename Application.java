@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Application {
 	private String name;
@@ -31,40 +32,30 @@ public class Application {
 		this.platform = platform;
 	}
 	
-	@Override
-	public String toString() {
-	    String result = "Name: " + getName()
-				+ "\nOrganization: " + getOrganization()
-				+ "\nVersion: " + getVersion()
-				+ "\nExternal Link: " + getExternalLink()
-				+ "\nDescription: " + getDescription()
-				+ "\nPrice: $" + getPrice()
-				+ "\nPlatform: " + getPlatform();
-	    return result;
+	public String display() {
+		if (price == 0) {
+			return getName() + "\n" 
+					+ getOrganization() + "\n" 
+					+ "Free!" + "\n"
+					+ getPlatform() + "\n" ;
+		}
+        else 
+        	return  getName() + "\n" 
+        			+ getOrganization() + "\n" 
+        			+ getPrice() + "\n" 
+        			+ getPlatform() + "\n" ;
 	}
-	@Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (!(o instanceof Application)) {
-            return false;
-        }
-        Application a = (Application)o;
-        return (this.name.toUpperCase().equals(a.getName().toUpperCase())
-             && this.organization.toUpperCase().equals(a.getOrganization().toUpperCase())
-             && this.version.toUpperCase().equals(a.getVersion().toUpperCase())
-             && this.externalLink.toUpperCase().equals(a.getExternalLink().toUpperCase())
-             && this.description.toUpperCase().equals(a.getDescription().toUpperCase())
-             && this.price == a.getPrice()
-             && this.platform.toUpperCase().equals(a.getPlatform().toUpperCase()));
-    }
-	public boolean equals(Application a) {
-        	return this.name.toUpperCase() == a.getName().toUpperCase();
-    }
-    public boolean equals(String a) {
-        return this.name.toUpperCase().equals(a.toUpperCase());
-    }
+	
+	public boolean search(String a) {
+		String[] str = a.split(" ");
+		for (String s: str) {
+			if (name.toUpperCase().contains(s.toUpperCase()) ||
+				description.toUpperCase().contains(s.toUpperCase()))
+				return true;
+			}
+		return false;
+	}
+	
 	public String getName() {
 		return name;
 	}
