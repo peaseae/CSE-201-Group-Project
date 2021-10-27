@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,23 +26,11 @@ public class SearchPage {
         for (Application a: appArray) {
             System.out.println("Result "+i);
             i++;
-            displayApp(a);
+            System.out.println(a.display());
         }
         if (appArray.size() == 0) {
             System.out.println("No results.\n");
             System.out.println("_______________________\n");
         }
-    }
-    
-    public static void displayApp(Application a) {
-        System.out.println(a.getName());
-        System.out.println(a.getOrganization());
-        if (a.getPrice()==0) 
-            System.out.println("Free!");
-        else
-            System.out.println("$"+a.getPrice());
-        System.out.println(a.getPlatform());
-        System.out.println("");
-    }
-
+    }   
 }
