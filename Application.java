@@ -31,19 +31,23 @@ public class Application {
 		this.platform = platform;
 	}
 	
-	public String display(Application a) {
-		return "Name: " + getName() + "/n" 
-				+ "Organization: " + getOrganization() + "/n" 
-				+ "Version: " + getVersion() + "/n" 
-				+ "External Link: " + getExternalLink() + "/n"
-				+ "Description: " + getDescription() + "/n"
-				+ "Price: $" + getPrice() + "/n"
-				+ "Platform: " + getPlatform() + "/n";
+	@Override
+	public String toString() {
+	    String result = "Name: " + getName()
+				+ "\nOrganization: " + getOrganization()
+				+ "\nVersion: " + getVersion()
+				+ "\nExternal Link: " + getExternalLink()
+				+ "\nDescription: " + getDescription()
+				+ "\nPrice: $" + getPrice()
+				+ "\nPlatform: " + getPlatform();
+	    return result;
 	}
-	
 	public boolean equals(Application a) {
-		return this.name == a.getName();
-	}
+        return this.name.toUpperCase() == a.getName().toUpperCase();
+    }
+    public boolean equals(String a) {
+        return this.name.toUpperCase().equals(a.toUpperCase());
+    }
 	public String getName() {
 		return name;
 	}
