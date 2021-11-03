@@ -33,4 +33,11 @@ public class SearchPage {
             System.out.println("_______________________\n");
         }
     }   
+    
+    public static void displaySortedSearchPage(ArrayList<Application> appArray, Scanner input) {
+    	//to-Do
+    	
+    	
+    	return;
+    }
 }
