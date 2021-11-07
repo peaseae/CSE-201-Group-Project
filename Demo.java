@@ -76,7 +76,7 @@ public class Demo {
         textArea.setEditable(false);
         JScrollPane scroll = new JScrollPane(textArea);
         scroll.setBackground(Color.white);
-        scroll.setBounds(40, 195, 700, 302);
+        scroll.setBounds(40, 195, 532, 302);
         frame.getContentPane().add(scroll);
         frame.setBounds(100, 100, 800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
