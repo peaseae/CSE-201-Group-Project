@@ -13,25 +13,5 @@ public class SearchBar {
 		}
 		return output;
 	}
-	
-	public static ArrayList<Application> searchWithFilter(Application[] data, String find) {
-		ArrayList<Application> output = new ArrayList<Application>();
-		//to-Do
-		
-		
-		
-		
-		return output;
-	}
-	
-	public static ArrayList<Application> sortedResult(Application[] data, String find) {
-		ArrayList<Application> output = new ArrayList<Application>();
-		//to-Do
-		
-		
-		
-		
-		return output;
-	}
 }
 
