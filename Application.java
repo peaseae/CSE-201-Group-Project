@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Date;
 
 public class Application {
 	private String name;
@@ -8,9 +8,10 @@ public class Application {
 	private String description;
 	private double price;
 	private String platform;
+	private Date dateAdded;
 	
 	public Application(String name, String organization, String version, String externalLink, String description,
-			double price, String platform) {
+			double price, String platform, Date dateAdded) {
 		super();
 		this.name = name;
 		this.organization = organization;
@@ -19,6 +20,7 @@ public class Application {
 		this.description = description;
 		this.price = price;
 		this.platform = platform;
+		this.dateAdded = dateAdded;
 	}
 	
 	public Application(String name, String organization, String description, double price, String platform) {
@@ -30,6 +32,7 @@ public class Application {
 		this.externalLink = "Updating...";
 		this.price = price;
 		this.platform = platform;
+		this.dateAdded = new Date(0000, 00, 00);
 	}
 
     @Override
@@ -40,7 +43,8 @@ public class Application {
                 + "\nExternal Link: " + getExternalLink()
                 + "\nDescription: " + getDescription()
                 + "\nPrice: $" + getPrice()
-                + "\nPlatform: " + getPlatform();
+                + "\nPlatform: " + getPlatform()
+                + "\nDate Added: " + getDateAdded();
         return result;
     }
     @Override
@@ -129,5 +133,11 @@ public class Application {
 	public void setPlatform(String platform) {
 		this.platform = platform;
 	}
+	public Date getDateAdded() {
+	    return dateAdded;
+	}
+	public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
+    }
 	
 }
