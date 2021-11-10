@@ -86,17 +86,67 @@ public class Demo1 {
         frame.setBounds(100, 100, 800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        JButton btnNewButton_2 = new JButton("Search");
-        
         // Makes sure the scroll bar starts at the top
         DefaultCaret caret = (DefaultCaret) textArea.getCaret();
         caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
+        
+        JComboBox comboBox = new JComboBox();
+        String[] platforms = {"Select Platform", "iOS", "Android", "Window", "Linux"};
+        for (String platform: platforms) {
+            comboBox.addItem(platform);
+        }
+        comboBox.setBounds(614, 195, 124, 42);
+        frame.getContentPane().add(comboBox);
+        
+        JComboBox comboBox_1 = new JComboBox();
+        String[] prices = {"Select Price", "Free", "$0.00 - $0.99", "$1.00 - $4.99", "$5.00 or more"};
+        for (String price: prices) {
+            comboBox_1.addItem(price);
+        }
+        comboBox_1.setBounds(614, 261, 124, 42);
+        frame.getContentPane().add(comboBox_1);
+        
+        JComboBox comboBox_2 = new JComboBox();
+        String[] sorts = {"Sort by...", "A - Z by App Name", "Z - A by App Name", "Date Added (Newest)", "Date Added (Oldest)"};
+        for (String sort: sorts) {
+            comboBox_2.addItem(sort);
+        }
+        comboBox_2.setBounds(614, 327, 124, 42);
+        frame.getContentPane().add(comboBox_2);
+        
+//        comboBox.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent event) {
+//                textArea.setText("");
+//                String key = (String)(comboBox.getSelectedItem());
+//                ArrayList<Application> curOutput = SearchBar.searchWithFilterPlatform(output, key);
+//                try {
+//                    if (curOutput.size() == 0) {
+//                        textArea.setText("No results found.");
+//                    }
+//                    for (Application app : curOutput) {
+//                        textArea.append(app.display() + "\n");
+//                    }
+//                }
+//                catch (Exception e) {
+//                    textArea.setText("No results founds.");
+//                }
+//                
+//            }
+//        });
+        
+        
+        
+        // Search button
+        JButton btnNewButton_2 = new JButton("Search");
         
         btnNewButton_2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 textArea.setText("");
                 String key = textField.getText();
-                output = SearchBar.search(apps, key);
+                String platformKey = (String)(comboBox.getSelectedItem());
+                String priceRangeKey = (String)(comboBox_1.getSelectedItem());
+                String sortKey = (String)(comboBox_2.getSelectedItem());
+                output = SearchBar.search(apps, key, priceRangeKey, platformKey, sortKey);
                 try {
                     if (output.size() == 0) {
                         textArea.setText("No results found.");
@@ -136,38 +186,5 @@ public class Demo1 {
         textField.setBounds(40, 129, 532, 42);
         frame.getContentPane().add(textField);
         textField.setColumns(10);
-        
-        JComboBox comboBox = new JComboBox();
-        String[] platforms = {"iOS", "Android", "Window", "Linux"};
-        for (String platform: platforms) {
-        	comboBox.addItem(platform);
-        }
-        comboBox.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent event) {
-        		textArea.setText("");
-                String key = (String)(comboBox.getSelectedItem());
-                ArrayList<Application> curOutput = SearchBar.searchWithFilterPlatform(output, key);
-        		try {
-        			if (curOutput.size() == 0) {
-                        textArea.setText("No results found.");
-                    }
-                    for (Application app : curOutput) {
-                        textArea.append(app.display() + "\n");
-                    }
-                }
-                catch (Exception e) {
-                    textArea.setText("No results founds.");
-                }
-        		
-        	}
-        });
-        comboBox.setBounds(614, 195, 124, 42);
-        frame.getContentPane().add(comboBox);
-        
-        JComboBox comboBox_1 = new JComboBox();
-        comboBox_1.setBounds(614, 267, 124, 42);
-        frame.getContentPane().add(comboBox_1);
-        
-
     }
 }
