@@ -79,6 +79,15 @@ public class SearchBar {
 //        Collections.sort(output, AppDateComparator);
 //        return output;
 //    }
-
+	public static ArrayList<Application> searchWithFilterPlatform(ArrayList<Application> data, String platf) {
+		//to-Do
+		ArrayList<Application> output = new ArrayList<Application>();
+		for(int i = 0; i < data.size(); i++) {
+			if (data.get(i).getPlatform().toUpperCase().equals(platf.toUpperCase())) {
+				output.add(data.get(i));
+			}
+		}
+		return output;
+	}
 }
 
