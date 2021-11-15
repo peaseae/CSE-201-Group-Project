@@ -70,18 +70,29 @@ public class Application {
     
 	public String display() {
 		if (price == 0) {
-			return getName() + "\n" 
-					+ getOrganization() + "\n" 
-					+ "Free!" + "\n"
-					+ getPlatform() + "\n" ;
+			return " " + getName()
+			        + "\n------------------------------------------------------------------------------------------------------------------------------------"
+                    + "\n External Link: " + getExternalLink()
+                    + "\n Price: Free!"
+                    + "\n Organization: " + getOrganization()
+					+ "\n Version: " + getVersion()
+					+ "\n Platform: " + getPlatform()
+			        + "\n Date Added: " + getDateAdded()
+			        + "\n Description: " + getDescription();
 		}
-        else 
-        	return  getName() + "\n" 
-        			+ getOrganization() + "\n$" 
-        			+ getPrice() + "\n" 
-        			+ getPlatform() + "\n" ;
+        else {
+        	return  " " + getName()
+                	+ "\n------------------------------------------------------------------------------------------------------------------------------------"
+                    + "\n External Link: " + getExternalLink()
+                    + "\n Price: $" + getPrice()
+                	+ "\n Organization: " + getOrganization()
+                    + "\n Version: " + getVersion()
+                    + "\n Platform: " + getPlatform()
+                    + "\n Date Added: " + getDateAdded()
+                    + "\n Description: " + getDescription();
+        }
 	}
-	
+    
 	public String displayHtml() {
         if (price == 0) {
             return "<html>" + getName() + "<br>" 

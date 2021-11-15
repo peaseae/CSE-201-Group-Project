@@ -29,7 +29,7 @@ public class Demo1 {
             new Application("Mood Tracker", "Mental Health for You", "2.3.1", "http://healthy.com/mood", "Used to track your moods and emotions.", 1.99, "Android", new Date(2015, 8, 5)),
             new Application("Food Ordering", "Convenient US", "1.0", "http://getfoodnow.com", "Connects you to someone to deliver your food.", 0.00, "iOS", new Date(2020, 9, 23))
     };
-    
+
     private JFrame frame;
     private JTextField searchField;
     public ArrayList<Application> output = new ArrayList<Application>();
@@ -67,7 +67,7 @@ public class Demo1 {
         frame.getContentPane().setLayout(null);
         frame.setBounds(100, 100, 800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         // create log in and sign up buttons
         JButton loginBtn = new JButton("Login");
         loginBtn.setBounds(558, 21, 100, 25);
@@ -75,13 +75,13 @@ public class Demo1 {
         JButton signUpBtn = new JButton("Sign up");
         signUpBtn.setBounds(670, 21, 100, 25);
         frame.getContentPane().add(signUpBtn);
-        
+
         // create title
         JLabel applicationsLabel = new JLabel("Browse App");
         applicationsLabel.setFont(new Font("Segoe UI", Font.PLAIN, 30));
         applicationsLabel.setBounds(40, 13, 189, 50);
         frame.getContentPane().add(applicationsLabel);
-        
+
         // create scrolling result panel
         JPanel resultPanel = new JPanel();
         resultPanel.setBackground(Color.white);
@@ -90,7 +90,7 @@ public class Demo1 {
         scroll.setBackground(Color.white);
         scroll.setBounds(40, 195, 532, 302);
         frame.getContentPane().add(scroll);
-        
+
         // create platform filter
         JComboBox platformBox = new JComboBox();
         String[] platforms = {"Select Platform", "iOS", "Android", "Window", "Linux"};
@@ -99,7 +99,7 @@ public class Demo1 {
         }
         platformBox.setBounds(614, 195, 124, 42);
         frame.getContentPane().add(platformBox);
-        
+
         // create price filter
         JComboBox priceBox = new JComboBox();
         String[] prices = {"Select Price", "Free", "$0.00 - $0.99", "$1.00 - $4.99", "$5.00 or more"};
@@ -108,7 +108,7 @@ public class Demo1 {
         }
         priceBox.setBounds(614, 261, 124, 42);
         frame.getContentPane().add(priceBox);
-        
+
         // create sort option
         JComboBox sortBox = new JComboBox();
         String[] sorts = {"Sort by...", "App Name A - Z", "App Name Z - A", "Date Added (Newest)", "Date Added (Oldest)"};
@@ -117,7 +117,7 @@ public class Demo1 {
         }
         sortBox.setBounds(614, 327, 124, 42);
         frame.getContentPane().add(sortBox);
-        
+
         // create search button and search field
         JButton searchBtn = new JButton("Search");
         searchBtn.setBounds(614, 129, 124, 42);
@@ -126,10 +126,18 @@ public class Demo1 {
         searchField.setBounds(40, 129, 532, 42);
         frame.getContentPane().add(searchField);
         searchField.setColumns(10);
+
+        // create panel to show individual app details
+        JPanel appPanel = new JPanel();
+        appPanel.setLayout(new BoxLayout(appPanel, BoxLayout.Y_AXIS));
+        JScrollPane scroll2 = new JScrollPane(appPanel);
+        scroll2.setBounds(40, 195, 532, 302);
         
         // create action listener to display search results in result panel
         ActionListener searchAction = new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
+                frame.getContentPane().remove(scroll2);
+                frame.getContentPane().add(scroll);
                 // clear panel of any old search results
                 resultPanel.removeAll();
                 resultPanel.revalidate();
@@ -150,10 +158,26 @@ public class Demo1 {
                         resultPanel.add(textMessage);
                     }
                     for (Application app : output) {
+                        // display each app as a button
                         JButton temp = new JButton(app.displayHtml());
                         temp.setHorizontalAlignment(SwingConstants.LEFT);
                         temp.setBackground(Color.WHITE);
                         resultPanel.add(temp);
+                        temp.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent arg0) {
+                                // bring up details scroll panel
+                                frame.getContentPane().remove(scroll);
+                                frame.getContentPane().add(scroll2);
+                                // clear panel of any old search results
+                                appPanel.removeAll();
+                                appPanel.revalidate();
+                                appPanel.repaint();
+                                // display information
+                                JTextArea textMessage = new JTextArea();
+                                textMessage.setText(app.display());
+                                appPanel.add(textMessage);
+                            }
+                        });
                     }
                 }
                 catch (Exception e) {
