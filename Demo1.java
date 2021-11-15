@@ -18,6 +18,8 @@ import java.util.Date;
 
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Demo1 {
     @SuppressWarnings("deprecation")
@@ -83,6 +85,18 @@ public class Demo1 {
 
         // create title
         JLabel applicationsLabel = new JLabel("Browse App");
+        applicationsLabel.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		try {
+        			frame.setVisible(false);
+                    Demo1 window = new Demo1();
+                    window.frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+        	}
+        });
         applicationsLabel.setFont(new Font("Segoe UI", Font.PLAIN, 30));
         applicationsLabel.setBounds(40, 13, 189, 50);
         frame.getContentPane().add(applicationsLabel);
