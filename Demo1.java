@@ -2,12 +2,17 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.Color;
+import java.awt.Component;
+
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.text.DefaultCaret;
 
 import java.awt.event.ActionListener;
@@ -30,7 +35,7 @@ public class Demo1 {
     };
     
     private JFrame frame;
-    private JTextField textField;
+    private JTextField searchField;
     public ArrayList<Application> output = new ArrayList<Application>();
 
     /**
@@ -64,127 +69,144 @@ public class Demo1 {
         frame.getContentPane().setBackground(new Color(210, 225, 225));
         frame.getContentPane().setLayout(null);
         
-        JButton btnNewButton = new JButton("Login");
-        btnNewButton.setBounds(558, 21, 100, 25);
-        frame.getContentPane().add(btnNewButton);
+        JButton loginBtn = new JButton("Login");
+        loginBtn.setBounds(558, 21, 100, 25);
+        frame.getContentPane().add(loginBtn);
         
-        JButton btnNewButton_1 = new JButton("Sign up");
-        btnNewButton_1.setBounds(670, 21, 100, 25);
-        frame.getContentPane().add(btnNewButton_1);
+        JButton signUpBtn = new JButton("Sign up");
+        signUpBtn.setBounds(670, 21, 100, 25);
+        frame.getContentPane().add(signUpBtn);
         
-        JLabel lblNewLabel = new JLabel("Application's Name");
-        lblNewLabel.setFont(new Font("Segoe UI Light", Font.PLAIN, 17));
-        lblNewLabel.setBounds(40, 13, 189, 36);
-        frame.getContentPane().add(lblNewLabel);
+        JLabel applicationsLabel = new JLabel("Browse App");
+        applicationsLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+        applicationsLabel.setBounds(40, 13, 189, 36);
+        frame.getContentPane().add(applicationsLabel);
         
-        JTextArea textArea = new JTextArea();
-        textArea.setEditable(false);
-        JScrollPane scroll = new JScrollPane(textArea);
+        JPanel resultPanel = new JPanel();
+        resultPanel.setBackground(Color.white);
+        resultPanel.setLayout(new BoxLayout(resultPanel, BoxLayout.Y_AXIS));
+        
+        JScrollPane scroll = new JScrollPane(resultPanel);
         scroll.setBackground(Color.white);
         scroll.setBounds(40, 195, 532, 302);
         frame.getContentPane().add(scroll);
         frame.setBounds(100, 100, 800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        // Makes sure the scroll bar starts at the top
-        DefaultCaret caret = (DefaultCaret) textArea.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
-        
-        JComboBox comboBox = new JComboBox();
+        JComboBox platformBox = new JComboBox();
         String[] platforms = {"Select Platform", "iOS", "Android", "Window", "Linux"};
         for (String platform: platforms) {
-            comboBox.addItem(platform);
+            platformBox.addItem(platform);
         }
-        comboBox.setBounds(614, 195, 124, 42);
-        frame.getContentPane().add(comboBox);
+        platformBox.setBounds(614, 195, 124, 42);
+        frame.getContentPane().add(platformBox);
         
-        JComboBox comboBox_1 = new JComboBox();
+        JComboBox priceBox = new JComboBox();
         String[] prices = {"Select Price", "Free", "$0.00 - $0.99", "$1.00 - $4.99", "$5.00 or more"};
         for (String price: prices) {
-            comboBox_1.addItem(price);
+            priceBox.addItem(price);
         }
-        comboBox_1.setBounds(614, 261, 124, 42);
-        frame.getContentPane().add(comboBox_1);
+        priceBox.setBounds(614, 261, 124, 42);
+        frame.getContentPane().add(priceBox);
         
-        JComboBox comboBox_2 = new JComboBox();
-        String[] sorts = {"Sort by...", "A - Z by App Name", "Z - A by App Name", "Date Added (Newest)", "Date Added (Oldest)"};
+        JComboBox sortBox = new JComboBox();
+        String[] sorts = {"Sort by...", "App Name A - Z", "App Name Z - A", "Date Added (Newest)", "Date Added (Oldest)"};
         for (String sort: sorts) {
-            comboBox_2.addItem(sort);
+            sortBox.addItem(sort);
         }
-        comboBox_2.setBounds(614, 327, 124, 42);
-        frame.getContentPane().add(comboBox_2);
+        sortBox.setBounds(614, 327, 124, 42);
+        frame.getContentPane().add(sortBox);
         
-//        comboBox.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent event) {
+        JButton searchBtn = new JButton("Search");
+        searchBtn.setBounds(614, 129, 124, 42);
+        frame.getContentPane().add(searchBtn);
+        
+      searchBtn.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent arg0) {
+              // clear panel of any old search results
+              resultPanel.removeAll();
+              resultPanel.revalidate();
+              resultPanel.repaint();
+              // take in search input
+              String key = searchField.getText();
+              // take in platform, price range, and sorting method from combo boxes
+              String platformKey = (String)(platformBox.getSelectedItem());
+              String priceRangeKey = (String)(priceBox.getSelectedItem());
+              String sortKey = (String)(sortBox.getSelectedItem());
+              // create output using the search word, filters, and sorting method
+              output = SearchBar.search(apps, key, priceRangeKey, platformKey, sortKey);
+              // display
+              try {
+                  if (output.size() == 0) {
+                      JTextArea textMessage = new JTextArea();
+                      textMessage.setText("\n  No results found.\n  Maybe try searching something else?");
+                      resultPanel.add(textMessage);
+                  }
+                  for (Application app : output) {
+                      JButton temp = new JButton(app.displayHtml());
+                      temp.setHorizontalAlignment(SwingConstants.LEFT);
+                      temp.setBackground(Color.WHITE);
+                      resultPanel.add(temp);
+                  }
+              }
+              catch (Exception e) {
+                  JTextArea textMessage = new JTextArea();
+                  textMessage.setText("No results found.");
+                  resultPanel.add(textMessage);
+              }
+          }
+      });
+        
+//        searchBtn.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent arg0) {
 //                textArea.setText("");
-//                String key = (String)(comboBox.getSelectedItem());
-//                ArrayList<Application> curOutput = SearchBar.searchWithFilterPlatform(output, key);
+//                String key = searchField.getText();
+//                // take in platform, price range, and sorting method from combo boxes
+//                String platformKey = (String)(platformBox.getSelectedItem());
+//                String priceRangeKey = (String)(priceBox.getSelectedItem());
+//                String sortKey = (String)(sortBox.getSelectedItem());
+//                // create output using the search word, filters, and sorting method
+//                output = SearchBar.search(apps, key, priceRangeKey, platformKey, sortKey);
+//                // display
 //                try {
-//                    if (curOutput.size() == 0) {
+//                    if (output.size() == 0) {
 //                        textArea.setText("No results found.");
 //                    }
-//                    for (Application app : curOutput) {
+//                    for (Application app : output) {
+//                        textArea.append(app.display() + "\n");
+//                        JButton appButton = new JButton(app.getName());
+//                        scroll.add(appButton);
+//                    }
+//                }
+//                catch (Exception e) {
+//                    textArea.setText("There was an error displaying the output.");
+//                }
+//            }
+//        });
+        
+        
+        
+        searchField = new JTextField();
+//        searchField.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent arg0) {
+//                textArea.setText("");
+//                String key = searchField.getText();
+//                output = SearchBar.search(apps, key);
+//                try {
+//                	if (output.size() == 0) {
+//                        textArea.setText("No results found.");
+//                    }
+//                    for (Application app : output) {
 //                        textArea.append(app.display() + "\n");
 //                    }
 //                }
 //                catch (Exception e) {
 //                    textArea.setText("No results founds.");
 //                }
-//                
 //            }
 //        });
-        
-        
-        
-        // Search button
-        JButton btnNewButton_2 = new JButton("Search");
-        
-        btnNewButton_2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                textArea.setText("");
-                String key = textField.getText();
-                String platformKey = (String)(comboBox.getSelectedItem());
-                String priceRangeKey = (String)(comboBox_1.getSelectedItem());
-                String sortKey = (String)(comboBox_2.getSelectedItem());
-                output = SearchBar.search(apps, key, priceRangeKey, platformKey, sortKey);
-                try {
-                    if (output.size() == 0) {
-                        textArea.setText("No results found.");
-                    }
-                    for (Application app : output) {
-                        textArea.append(app.display() + "\n");
-                    }
-                }
-                catch (Exception e) {
-                    textArea.setText("No results found. (Error)");
-                }
-            }
-        });
-        
-        btnNewButton_2.setBounds(614, 129, 124, 42);
-        frame.getContentPane().add(btnNewButton_2);
-        
-        textField = new JTextField();
-        textField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                textArea.setText("");
-                String key = textField.getText();
-                output = SearchBar.search(apps, key);
-                try {
-                	if (output.size() == 0) {
-                        textArea.setText("No results found.");
-                    }
-                    for (Application app : output) {
-                        textArea.append(app.display() + "\n");
-                    }
-                }
-                catch (Exception e) {
-                    textArea.setText("No results founds.");
-                }
-            }
-        });
-        textField.setBounds(40, 129, 532, 42);
-        frame.getContentPane().add(textField);
-        textField.setColumns(10);
+        searchField.setBounds(40, 129, 532, 42);
+        frame.getContentPane().add(searchField);
+        searchField.setColumns(10);
     }
 }

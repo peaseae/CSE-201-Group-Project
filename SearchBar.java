@@ -31,17 +31,17 @@ public class SearchBar {
         }
 		// sort if necessary
 		switch (sort) {
-            case "A - Z by App Name":
+            case "App Name A - Z":
                 Collections.sort(output, AppNameComparator);
                 break;
-            case "Z - A by App Name":
+            case "App Name Z - A":
                 Collections.sort(output, AppNameReverseComparator);
                 break;
             case "Date Added (Newest)":
-                Collections.sort(output, AppDateComparator);
+                Collections.sort(output, AppDateReverseComparator);
                 break;
             case "Date Added (Oldest)":
-                Collections.sort(output, AppDateReverseComparator);
+                Collections.sort(output, AppDateComparator);
                 break;
         }
 		return output;

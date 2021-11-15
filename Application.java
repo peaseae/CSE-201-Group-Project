@@ -67,6 +67,7 @@ public class Application {
     public boolean equals(String a) {
         return this.name.toUpperCase().equals(a.toUpperCase());
     }
+    
 	public String display() {
 		if (price == 0) {
 			return getName() + "\n" 
@@ -80,6 +81,22 @@ public class Application {
         			+ getPrice() + "\n" 
         			+ getPlatform() + "\n" ;
 	}
+	
+	public String displayHtml() {
+        if (price == 0) {
+            return "<html>" + getName() + "<br>" 
+                    + getOrganization() + "<br>" 
+                    + "Free!" + "<br>"
+                    + getPlatform() + "<br>"
+                    + "</html>";
+        }
+        else 
+            return  "<html>" + getName() + "<br>" 
+                    + getOrganization() + "<br>$" 
+                    + getPrice() + "<br>" 
+                    + getPlatform() + "<br>"
+                    + "</html>";
+    }
 	
 	public boolean search(String a) {
 		String[] str = a.split(" ");
