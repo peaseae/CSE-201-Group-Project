@@ -27,7 +27,12 @@ public class Demo1 {
             new Application("Calming Fish Tank", "The Games Company", "1.4", "http://fishgame.com", "A relaxing game where you watch swimming fish.", 2.99, "Android", new Date(2008, 1, 9)),
             new Application("Tree Identifier", "Explorers Inc.", "4.3", "http://explorersinc.com/treeidapp", "Used to identify tree species.", 0.99, "iOS", new Date(2020, 11, 7)),
             new Application("Mood Tracker", "Mental Health for You", "2.3.1", "http://healthy.com/mood", "Used to track your moods and emotions.", 1.99, "Android", new Date(2015, 8, 5)),
-            new Application("Food Ordering", "Convenient US", "1.0", "http://getfoodnow.com", "Connects you to someone to deliver your food.", 0.00, "iOS", new Date(2020, 9, 23))
+            new Application("Food Ordering", "Convenient US", "1.0", "http://getfoodnow.com", "Connects you to someone to deliver your food. Over 10 different restaurants are available, and some might be near you! Download now to find out!", 0.00, "iOS", new Date(2020, 9, 23)),
+            new Application("Texting", "App Essentials", "5.0", "http://text.com", "Text all of your best friends with this one cool app! iOS only. In-app purchases included.", 0.00, "iOS", new Date(2001, 12, 29)),
+            new Application("Student App", "Miami University", "5.3.4", "http://miamistudent.com/app", "Miami-exclusive app for all your student needs. Register for classes, order food on campus, and track the buses. Available only on Windows.", 0.00, "Windows", new Date(2020, 12, 20)),
+            new Application("Meditation Guide", "Mental Health for You", "1.2.4", "http://healthy.com/meditate", "A guide to over 20 different meditation sets to relax your mind and train your body.", 11.99, "Android", new Date(2010, 1, 9)),
+            new Application("Linux Pro", "Experts of Computers", "3.4.1", "http://linux.com/pro", "Get this app for Linux to improve your experience and become a pro!", 1.49, "Linux", new Date(2005, 5, 9)),
+            new Application("Mountain Climber Expert Challenge", "Extreme Games", "4.5.3", "http://extremegames.com/climb", "Challenge yourself and compare your rank to your friends! Only the strongest will make it to the top. Download now to find out if you have what it takes to become king of the mountain!", 1.99, "iOS", new Date(2018, 9, 7))
     };
 
     private JFrame frame;
@@ -93,7 +98,7 @@ public class Demo1 {
 
         // create platform filter
         JComboBox platformBox = new JComboBox();
-        String[] platforms = {"Select Platform", "iOS", "Android", "Window", "Linux"};
+        String[] platforms = {"Select Platform", "iOS", "Android", "Windows", "Linux"};
         for (String platform: platforms) {
             platformBox.addItem(platform);
         }
@@ -174,6 +179,8 @@ public class Demo1 {
                                 appPanel.repaint();
                                 // display information
                                 JTextArea textMessage = new JTextArea();
+                                textMessage.setLineWrap(true);
+                                textMessage.setWrapStyleWord(true);
                                 textMessage.setText(app.display());
                                 appPanel.add(textMessage);
                             }
