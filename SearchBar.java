@@ -19,14 +19,14 @@ public class SearchBar {
 		return output;
 	}
 	
-	public static ArrayList<Application> search(Application[] data, String find, String price, String platform, String sort) {
+	public static ArrayList<Application> search(ArrayList<Application> data, String find, String price, String platform, String sort) {
 		ArrayList<Application> output = new ArrayList<Application>();
 		double[] prices = convertPriceKey(price);
-		for(int i = 0; i < data.length; i++) {
-            if (data[i].search(find)
-                    && (platform.equals("Select Platform") || platform.equals(data[i].getPlatform()))
-                    && data[i].getPrice() >= prices[0] && data[i].getPrice() <= prices[1]) {
-                output.add(data[i]);
+		for(int i = 0; i < data.size(); i++) {
+            if (data.get(i).search(find)
+                    && (platform.equals("Select Platform") || platform.equals(data.get(i).getPlatform()))
+                    && data.get(i).getPrice() >= prices[0] && data.get(i).getPrice() <= prices[1]) {
+                output.add(data.get(i));
             }
         }
 		// sort if necessary
@@ -38,10 +38,10 @@ public class SearchBar {
                 Collections.sort(output, AppNameReverseComparator);
                 break;
             case "Date Added (Newest)":
-                Collections.sort(output, AppDateReverseComparator);
+                Collections.sort(output, AppDateComparator);
                 break;
             case "Date Added (Oldest)":
-                Collections.sort(output, AppDateComparator);
+                Collections.sort(output, AppDateReverseComparator);
                 break;
         }
 		return output;

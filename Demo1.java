@@ -9,7 +9,11 @@ import javax.swing.SwingConstants;
 
 import java.awt.EventQueue;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import java.awt.event.ActionEvent;
@@ -23,19 +27,19 @@ import java.awt.event.MouseEvent;
 
 public class Demo1 {
     @SuppressWarnings("deprecation")
-    Application apps[] = {
-            new Application("Compass", "Explorers Inc.", "2.0", "http://compass.com", "An app that works as a compass.", 0.99, "iOS", new Date(2011, 12, 29)),
-            new Application("Money Transfer", "29th Bank", "1.3.4", "http://bank29.com/app", "Allows you to transfer money to a friend.", 0.00, "Android", new Date(2018, 2, 20)),
-            new Application("Calming Fish Tank", "The Games Company", "1.4", "http://fishgame.com", "A relaxing game where you watch swimming fish.", 2.99, "Android", new Date(2008, 1, 9)),
-            new Application("Tree Identifier", "Explorers Inc.", "4.3", "http://explorersinc.com/treeidapp", "Used to identify tree species.", 0.99, "iOS", new Date(2020, 11, 7)),
-            new Application("Mood Tracker", "Mental Health for You", "2.3.1", "http://healthy.com/mood", "Used to track your moods and emotions.", 1.99, "Android", new Date(2015, 8, 5)),
-            new Application("Food Ordering", "Convenient US", "1.0", "http://getfoodnow.com", "Connects you to someone to deliver your food. Over 10 different restaurants are available, and some might be near you! Download now to find out!", 0.00, "iOS", new Date(2020, 9, 23)),
-            new Application("Texting", "App Essentials", "5.0", "http://text.com", "Text all of your best friends with this one cool app! iOS only. In-app purchases included.", 0.00, "iOS", new Date(2001, 12, 29)),
-            new Application("Student App", "Miami University", "5.3.4", "http://miamistudent.com/app", "Miami-exclusive app for all your student needs. Register for classes, order food on campus, and track the buses. Available only on Windows.", 0.00, "Windows", new Date(2020, 12, 20)),
-            new Application("Meditation Guide", "Mental Health for You", "1.2.4", "http://healthy.com/meditate", "A guide to over 20 different meditation sets to relax your mind and train your body.", 11.99, "Android", new Date(2010, 1, 9)),
-            new Application("Linux Pro", "Experts of Computers", "3.4.1", "http://linux.com/pro", "Get this app for Linux to improve your experience and become a pro!", 1.49, "Linux", new Date(2005, 5, 9)),
-            new Application("Mountain Climber Expert Challenge", "Extreme Games", "4.5.3", "http://extremegames.com/climb", "Challenge yourself and compare your rank to your friends! Only the strongest will make it to the top. Download now to find out if you have what it takes to become king of the mountain!", 1.99, "iOS", new Date(2018, 9, 7))
-    };
+    public ArrayList<Application> apps = new ArrayList<Application>(){{
+            add(new Application("Compass", "Explorers Inc.", "2.0", "http://compass.com", "An app that works as a compass.", 0.99, "iOS", new Date(2011, 12, 29)));
+            add(new Application("Money Transfer", "29th Bank", "1.3.4", "http://bank29.com/app", "Allows you to transfer money to a friend.", 0.00, "Android", new Date(2018, 2, 20)));
+            add(new Application("Calming Fish Tank", "The Games Company", "1.4", "http://fishgame.com", "A relaxing game where you watch swimming fish.", 2.99, "Android", new Date(2008, 1, 9)));
+            add(new Application("Tree Identifier", "Explorers Inc.", "4.3", "http://explorersinc.com/treeidapp", "Used to identify tree species.", 0.99, "iOS", new Date(2020, 11, 7)));
+            add(new Application("Mood Tracker", "Mental Health for You", "2.3.1", "http://healthy.com/mood", "Used to track your moods and emotions.", 1.99, "Android", new Date(2015, 8, 5)));
+            add(new Application("Food Ordering", "Convenient US", "1.0", "http://getfoodnow.com", "Connects you to someone to deliver your food. Over 10 different restaurants are available, and some might be near you! Download now to find out!", 0.00, "iOS", new Date(2020, 9, 23)));
+            add(new Application("Texting", "App Essentials", "5.0", "http://text.com", "Text all of your best friends with this one cool app! iOS only. In-app purchases included.", 0.00, "iOS", new Date(2001, 12, 29)));
+            add(new Application("Student App", "Miami University", "5.3.4", "http://miamistudent.com/app", "Miami-exclusive app for all your student needs. Register for classes, order food on campus, and track the buses. Available only on Windows.", 0.00, "Windows", new Date(2020, 12, 20)));
+            add(new Application("Meditation Guide", "Mental Health for You", "1.2.4", "http://healthy.com/meditate", "A guide to over 20 different meditation sets to relax your mind and train your body.", 11.99, "Android", new Date(2010, 1, 9)));
+            add(new Application("Linux Pro", "Experts of Computers", "3.4.1", "http://linux.com/pro", "Get this app for Linux to improve your experience and become a pro!", 1.49, "Linux", new Date(2005, 5, 9)));
+            add(new Application("Mountain Climber Expert Challenge", "Extreme Games", "4.5.3", "http://extremegames.com/climb", "Challenge yourself and compare your rank to your friends! Only the strongest will make it to the top. Download now to find out if you have what it takes to become king of the mountain!", 1.99, "iOS", new Date(2018, 9, 7)));
+    }};
 
     private JFrame frame;
     private JTextField searchField;
@@ -83,19 +87,19 @@ public class Demo1 {
         signUpBtn.setBounds(670, 21, 100, 25);
         frame.getContentPane().add(signUpBtn);
 
-        // create title
+        // create title that functions as home button
         JLabel applicationsLabel = new JLabel("Browse App");
         applicationsLabel.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent arg0) {
-        		try {
-        			frame.setVisible(false);
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                try {
+                    frame.setVisible(false);
                     Demo1 window = new Demo1();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-        	}
+            }
         });
         applicationsLabel.setFont(new Font("Segoe UI", Font.PLAIN, 30));
         applicationsLabel.setBounds(40, 13, 189, 50);
@@ -152,10 +156,120 @@ public class Demo1 {
         JScrollPane scroll2 = new JScrollPane(appPanel);
         scroll2.setBounds(40, 195, 532, 302);
         
+        // create panel to show app adding form
+        JPanel addAppPanel = new JPanel();
+        //JScrollPane scroll3 = new JScrollPane(addAppPanel);
+        addAppPanel.setBounds(40, 195, 532, 302);
+        addAppPanel.setLayout(new GridLayout(0,4));
+        
+        // create add app button
+        JButton addAppBtn = new JButton("Add New App");
+        addAppBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                // bring up adding app scroll panel
+                frame.getContentPane().remove(scroll);
+                frame.getContentPane().remove(scroll2);
+                frame.getContentPane().add(addAppPanel);
+                // clear panel of any old search results
+                addAppPanel.removeAll();
+                addAppPanel.revalidate();
+                addAppPanel.repaint();
+                // display fields to be filled in
+                JLabel nameLabel = new JLabel("    App Name:");
+                addAppPanel.add(nameLabel);
+                JTextField nameInput = new JTextField();
+                addAppPanel.add(nameInput);
+                JLabel orgLabel = new JLabel("    Organization:");
+                addAppPanel.add(orgLabel);
+                JTextField orgInput = new JTextField();
+                addAppPanel.add(orgInput);
+                JLabel versionLabel = new JLabel("    Version:");
+                addAppPanel.add(versionLabel);
+                JTextField versionInput = new JTextField();
+                addAppPanel.add(versionInput);
+                JLabel linkLabel = new JLabel("    External Link:");
+                addAppPanel.add(linkLabel);
+                JTextField linkInput = new JTextField();
+                addAppPanel.add(linkInput);
+                JLabel descLabel = new JLabel("    Description:");
+                addAppPanel.add(descLabel);
+                JTextField descInput = new JTextField();
+                addAppPanel.add(descInput);
+                JLabel priceLabel = new JLabel("    Price in dollars:");
+                addAppPanel.add(priceLabel);
+                JTextField priceInput = new JTextField();
+                addAppPanel.add(priceInput);
+                JLabel platformLabel = new JLabel("    Platform:");
+                addAppPanel.add(platformLabel);
+                JComboBox platformInput = new JComboBox();
+                String[] platforms = {"iOS", "Android", "Windows", "Linux"};
+                for (String platform: platforms) {
+                    platformInput.addItem(platform);
+                }
+                platformInput.setBackground(Color.WHITE);
+                addAppPanel.add(platformInput);
+                JLabel empty1 = new JLabel("");
+                addAppPanel.add(empty1);
+                JLabel empty2 = new JLabel("");
+                addAppPanel.add(empty2);
+                JLabel empty3 = new JLabel("");
+                addAppPanel.add(empty3);
+                JLabel empty4 = new JLabel("");
+                addAppPanel.add(empty4);
+                JLabel message = new JLabel("");
+                addAppPanel.add(message);
+                JButton submit = new JButton("Submit App");
+                submit.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent arg0) {
+                        // take in inputted fields
+                        String name = nameInput.getText();
+                        String org = orgInput.getText();
+                        String version = versionInput.getText();
+                        String link = linkInput.getText();
+                        String desc = descInput.getText();
+                        String price = priceInput.getText();
+                        String platform = (String)(platformInput.getSelectedItem());
+                        // make sure no fields are left blank
+                        if (name.equals("") || org.equals("")|| version.equals("")
+                                || link.equals("") || desc.equals("") || price.equals("")) {
+                            message.setForeground(Color.RED);
+                            message.setFont(new Font("SansSerif", Font.PLAIN, 11));
+                            message.setText("Please complete all fields.");
+                        } else {
+                            try {
+                                // convert price to double
+                                double priceInt = Double.parseDouble(price);
+                                apps.add(new Application(name, org, version, link, desc, priceInt, platform, new Date()));
+                                message.setForeground(new Color(120, 175, 155));
+                                message.setFont(new Font("SansSerif", Font.BOLD, 12));
+                                message.setText("App added!");
+                                nameInput.setText("");
+                                orgInput.setText("");
+                                versionInput.setText("");
+                                linkInput.setText("");
+                                descInput.setText("");
+                                priceInput.setText("");
+                            } catch (Exception e) {
+                                // if price cannot be converted to a double
+                                message.setForeground(Color.RED);
+                                message.setFont(new Font("SansSerif", Font.PLAIN, 11));
+                                message.setText("Price must be a number.");
+                            }
+                        }
+                    }
+                });
+                addAppPanel.add(submit);
+            }
+        });
+        addAppBtn.setBounds(614, 432, 124, 64);
+        addAppBtn.setBackground(new Color(150, 195, 175));
+        frame.getContentPane().add(addAppBtn);
+        
         // create action listener to display search results in result panel
         ActionListener searchAction = new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 frame.getContentPane().remove(scroll2);
+                frame.getContentPane().remove(addAppPanel);
                 frame.getContentPane().add(scroll);
                 // clear panel of any old search results
                 resultPanel.removeAll();
@@ -186,6 +300,7 @@ public class Demo1 {
                             public void actionPerformed(ActionEvent arg0) {
                                 // bring up details scroll panel
                                 frame.getContentPane().remove(scroll);
+                                frame.getContentPane().remove(addAppPanel);
                                 frame.getContentPane().add(scroll2);
                                 // clear panel of any old search results
                                 appPanel.removeAll();
