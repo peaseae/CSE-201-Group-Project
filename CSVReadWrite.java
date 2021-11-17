@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,9 +9,18 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CSVReadWrite {
-	private static String fileName = "C:\\Users\\Kenten\\Desktop\\CSE201\\CSE201\\src\\logins.csv";
+	private static String fileName = "logins.csv";
+	
+	public static void checkFile(String fileName) {
+		File temp = new File(fileName);
+		if(!temp.exists()) {
+			File file = new File("logins.csv");
+		}
+		fileName = "logins.csv";
+	}
 
 	public static void writeCsv(String fileName) {
+		checkFile(fileName);
 
 		Scanner obj = new Scanner(System.in);
 		System.out.println("Enter Username: ");
@@ -45,6 +55,7 @@ public class CSVReadWrite {
 	}
 
 	public static void readCsv(String fileName) {
+		checkFile(fileName);
 		BufferedReader reader = null;
 		List<login> logins = new ArrayList<login>();
 		
@@ -68,6 +79,7 @@ public class CSVReadWrite {
 	}
 	
 	public static boolean checkLogin(String fileName) {
+		checkFile(fileName);
 		Scanner obj = new Scanner(System.in);
 		System.out.println("Enter Username: ");
 
