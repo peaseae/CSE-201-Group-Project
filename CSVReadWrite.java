@@ -19,20 +19,10 @@ public class CSVReadWrite {
 		fileName = "logins.csv";
 	}
 
-	public static boolean signUp(String fileName) {
+	public static boolean signUp(String fileName, String userName, String password) {
 		checkFile(fileName);
 
-		Scanner obj = new Scanner(System.in);
-		System.out.println("Enter Username: ");
-
-		String user = obj.nextLine();
-
-		Scanner obj2 = new Scanner(System.in);
-		System.out.println("Enter Password: ");
-
-		String pass = obj2.nextLine();
-
-		login l = new login(user, pass);
+		login l = new login(userName, password);
 
 		BufferedReader reader = null;
 		List<login> logins = new ArrayList<login>();
@@ -104,17 +94,8 @@ public class CSVReadWrite {
 
 	}
 
-	public static boolean checkLogin(String fileName) {
+	public static boolean checkLogin(String fileName, String user, String pass) {
 		checkFile(fileName);
-		Scanner obj = new Scanner(System.in);
-		System.out.println("Enter Username: ");
-
-		String user = obj.nextLine();
-
-		Scanner obj2 = new Scanner(System.in);
-		System.out.println("Enter Password: ");
-
-		String pass = obj2.nextLine();
 
 		login l = new login(user, pass);
 
