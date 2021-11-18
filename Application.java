@@ -10,6 +10,17 @@ public class Application {
 	private String platform;
 	private Date dateAdded;
 	
+	/**
+	 * Full constructor for Application
+	 * @param name String The name of the application
+	 * @param organization String The organization which created the application
+	 * @param version String The current version of the app, eg. 2.0
+	 * @param externalLink String A link to the app's website
+	 * @param description String A description of the app
+	 * @param price Double The price of the app
+	 * @param platform String The platform the app was made for, such as iOS, Android, Windows, or Linux
+	 * @param dateAdded Date The date and time that the app was added to BrowseApp
+	 */
 	public Application(String name, String organization, String version, String externalLink, String description,
 			double price, String platform, Date dateAdded) {
 		super();
@@ -23,6 +34,14 @@ public class Application {
 		this.dateAdded = dateAdded;
 	}
 	
+	/**
+	 * Partial constructor for Application which does not include date added, version, or external link
+	 * @param name String The name of the application
+	 * @param organization String The organization which created the application
+	 * @param description String A description of the app
+	 * @param price Double The price of the app
+	 * @param platform String The platform the app was made for, such as iOS, Android, Windows, or Linux
+	 */
 	public Application(String name, String organization, String description, double price, String platform) {
 		super();
 		this.name = name;
@@ -47,6 +66,7 @@ public class Application {
                 + "\nDate Added: " + getDateAdded();
         return result;
     }
+    
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -64,10 +84,20 @@ public class Application {
              && this.price == a.getPrice()
              && this.platform.toUpperCase().equals(a.getPlatform().toUpperCase()));
     }
+    
+    /**
+     * Method used in testing to compare an app's name to a string
+     * @param a String to be compared to
+     * @return True if they match (non case sensitive), false otherwise
+     */
     public boolean equals(String a) {
         return this.name.toUpperCase().equals(a.toUpperCase());
     }
     
+    /**
+     * Method used to display all of an application's information
+     * @return String displaying the information
+     */
 	public String display() {
 		if (price == 0) {
 			return " " + getName()
@@ -93,6 +123,11 @@ public class Application {
         }
 	}
     
+	/**
+	 * Method used to display all of an app's information in HTML form
+	 * so it can be used within a button
+	 * @return String displaying the information in HTML form
+	 */
 	public String displayHtml() {
         if (price == 0) {
             return "<html>" + getName() + "<br>" 
@@ -109,6 +144,11 @@ public class Application {
                     + "</html>";
     }
 	
+	/**
+	 * Method to see if the name of an app contains a given search key
+	 * @param a String to be searched for
+	 * @return True if the string can be found, false otherwise
+	 */
 	public boolean search(String a) {
 		String[] str = a.split(" ");
 		for (String s: str) {

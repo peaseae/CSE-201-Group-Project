@@ -4,6 +4,11 @@ public class login {
 	public String username;
 	public String password;
 	
+	/**
+	 * Constructor
+	 * @param username String the inputted username
+	 * @param password String the inputted password
+	 */
 	public login(String username, String password) {
 		super();
 		this.username = username;

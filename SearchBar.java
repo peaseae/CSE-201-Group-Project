@@ -9,6 +9,12 @@ import java.util.Date;
 
 public class SearchBar {
 
+    /**
+     * A simplified search using only the search box
+     * @param data An array of applications to be searched through
+     * @param find String the key to find
+     * @return An arraylist of all search results matching the key
+     */
 	public static ArrayList<Application> search(Application[] data, String find) {
 		ArrayList<Application> output = new ArrayList<Application>();
 		for(int i = 0; i < data.length; i++) {
@@ -19,6 +25,15 @@ public class SearchBar {
 		return output;
 	}
 	
+	/**
+	 * A full search using search box, filters, and sorting methods
+	 * @param data ArrayList of data to be searched through
+	 * @param find String key to be searched for
+	 * @param price String The selected price filter
+	 * @param platform String The selected platform filter
+	 * @param sort String The selected sorting method
+	 * @return An arraylist of applications resulting from the search
+	 */
 	public static ArrayList<Application> search(ArrayList<Application> data, String find, String price, String platform, String sort) {
 		ArrayList<Application> output = new ArrayList<Application>();
 		double[] prices = convertPriceKey(price);
@@ -47,6 +62,11 @@ public class SearchBar {
 		return output;
 	}
 	
+	/**
+	 * A method to convert a String price range into an upper and lower bound
+	 * @param priceKey String the range of prices in string format
+	 * @return An array of doubles containing a lower bound and an upper bound
+	 */
 	public static double[] convertPriceKey(String priceKey) {
 	    double[] prices = new double[2];
 	    switch (priceKey) {
@@ -74,6 +94,9 @@ public class SearchBar {
 	    return prices;
 	}
 	
+	/**
+	 * Comparator used for sorting alphabetically.
+	 */
 	public static Comparator<Application> AppNameComparator = new Comparator<Application>() {
            public int compare(Application a1, Application a2) {
                String AppName1 = a1.getName().toUpperCase();
@@ -83,6 +106,9 @@ public class SearchBar {
            }
    };
    
+   /**
+    * Comparator used for sorting reverse alphabetically.
+    */
    public static Comparator<Application> AppNameReverseComparator = new Comparator<Application>() {
        public int compare(Application a1, Application a2) {
            String AppName1 = a1.getName().toUpperCase();
@@ -92,6 +118,9 @@ public class SearchBar {
        }
    };
    
+   /**
+    * Comparator used for sorting by date newest to oldest.
+    */
    public static Comparator<Application> AppDateComparator = new Comparator<Application>() {
        public int compare(Application a1, Application a2) {
            Date AppDateAdded1 = a1.getDateAdded();
@@ -100,6 +129,9 @@ public class SearchBar {
        }
    };
    
+   /**
+    * Comparator used for sorting by date oldest to newest.
+    */
    public static Comparator<Application> AppDateReverseComparator = new Comparator<Application>() {
        public int compare(Application a1, Application a2) {
            Date AppDateAdded1 = a1.getDateAdded();
@@ -107,50 +139,5 @@ public class SearchBar {
            return AppDateAdded2.compareTo(AppDateAdded1);
        }
    };
-   
-//	public static ArrayList<Application> sortedResultTitle(Application[] data, String find) {
-//	    ArrayList<Application> output = new ArrayList<Application>();
-//        for(int i = 0; i < data.length; i++) {
-//            if (data[i].search(find)) {
-//                output.add(data[i]);
-//            }
-//        }
-//        Collections.sort(output, AppNameComparator);
-//        return output;
-//	}
-	
-
-	
-//	public static ArrayList<Application> sortedResultDate(Application[] data, String find) {
-//        ArrayList<Application> output = new ArrayList<Application>();
-//        for(int i = 0; i < data.length; i++) {
-//            if (data[i].search(find)) {
-//                output.add(data[i]);
-//            }
-//        }
-//        Collections.sort(output, AppDateComparator);
-//        return output;
-//    }
-	public static ArrayList<Application> searchWithFilterPlatform(ArrayList<Application> data, String platf) {
-		//to-Do
-		ArrayList<Application> output = new ArrayList<Application>();
-		for(int i = 0; i < data.size(); i++) {
-			if (data.get(i).getPlatform().toUpperCase().equals(platf.toUpperCase())) {
-				output.add(data.get(i));
-			}
-		}
-		return output;
-	}
-	
-	public static ArrayList<Application> searchWithFilterPrice(ArrayList<Application> data, double p1, double p2) {
-        //to-Do
-        ArrayList<Application> output = new ArrayList<Application>();
-        for(int i = 0; i < data.size(); i++) {
-            if ((data.get(i).getPrice() > p1) && (data.get(i).getPrice() < p2)) {
-                output.add(data.get(i));
-            }
-        }
-        return output;
-    }
 }
 

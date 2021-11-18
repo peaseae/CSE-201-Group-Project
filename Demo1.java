@@ -46,6 +46,7 @@ public class Demo1 {
 	private static JTextField searchField;
 	public static ArrayList<Application> output = new ArrayList<Application>();
 	public static boolean hasLogin = false;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -70,6 +71,9 @@ public class Demo1 {
 		initialize();
 	}
 
+	/**
+	 * Updates the frame when the user is logged in
+	 */
 	public static void loggedIn(){
 		frame.dispose();
 		hasLogin = true;
@@ -80,8 +84,6 @@ public class Demo1 {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-
-
 	private static void initialize() {
 		// create frame
 		frame = new JFrame();

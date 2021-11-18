@@ -126,7 +126,7 @@ public class CSVReadWrite {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(signUp(fileName));
+		// System.out.println(signUp(fileName));
 		//		readCsv(fileName);
 		//		System.out.println(checkLogin(fileName));
 	}
