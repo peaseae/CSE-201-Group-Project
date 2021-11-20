@@ -5,8 +5,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 
-
-
+/**
+ * Date: 11/19/21
+ * Class used to search, sort, and filter applications
+ * @author - Hiep Cao
+ * @author - Abigail Pease
+ * @author - Kenten Egbert
+ * @author - Caleb McConnell
+ * 
+ */
 public class SearchBar {
 
     /**

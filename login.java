@@ -1,4 +1,12 @@
-
+/**
+ * Date: 11/19/21
+ * Class containing username and password together to represent one account
+ * @author - Hiep Cao
+ * @author - Abigail Pease
+ * @author - Kenten Egbert
+ * @author - Caleb McConnell
+ * 
+ */
 public class login {
 
 	public String username;

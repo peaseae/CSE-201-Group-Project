@@ -14,13 +14,34 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Date: 11/19/21
+ * Class creating a log in screen
+ * @author - Hiep Cao
+ * @author - Abigail Pease
+ * @author - Kenten Egbert
+ * @author - Caleb McConnell
+ * 
+ */
 public class LogInSc extends JFrame {
 
+    /**
+     * The JPanel displaying the login screen
+     */
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	/**
+	 * Text field where username is inputted
+	 */
+	private JTextField userField;
+	/**
+	 * Text field where password is inputted
+	 */
+	private JTextField passField;
+	/**
+	 * The frame displaying the login screen
+	 */
 	public static LogInSc frame = new LogInSc();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -48,44 +69,37 @@ public class LogInSc extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("User Name: ");
-		lblNewLabel.setBounds(46, 83, 148, 48);
-		contentPane.add(lblNewLabel);
+		JLabel userLabel = new JLabel("User Name: ");
+		userLabel.setBounds(46, 83, 148, 48);
+		contentPane.add(userLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Password:");
-		lblNewLabel_1.setBounds(46, 144, 122, 48);
-		contentPane.add(lblNewLabel_1);
+		JLabel passLabel = new JLabel("Password:");
+		passLabel.setBounds(46, 144, 122, 48);
+		contentPane.add(passLabel);
 		
-		JLabel lblNewLabel_2 = new JLabel("Welcome back!");
-		lblNewLabel_2.setFont(new Font("Trebuchet MS", Font.ITALIC, 18));
-		lblNewLabel_2.setBounds(256, 24, 129, 27);
-		contentPane.add(lblNewLabel_2);
+		JLabel welcomeLabel = new JLabel("Welcome back!");
+		welcomeLabel.setFont(new Font("Trebuchet MS", Font.ITALIC, 18));
+		welcomeLabel.setBounds(256, 24, 129, 27);
+		contentPane.add(welcomeLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(168, 96, 310, 22);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		userField = new JTextField();
+		userField.setBounds(168, 96, 310, 22);
+		contentPane.add(userField);
+		userField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(168, 157, 310, 22);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		passField = new JTextField();
+		passField.setBounds(168, 157, 310, 22);
+		contentPane.add(passField);
+		passField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Log In");
-		btnNewButton.setBounds(238, 214, 97, 40);
-		contentPane.add(btnNewButton);
+		JButton loginButton = new JButton("Log In");
+		loginButton.setBounds(238, 214, 97, 40);
+		contentPane.add(loginButton);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(124, 280, 331, 22);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
-		textField_2.setBackground(null);
-		textField_2.setBorder(null);
-		
-		
-		btnNewButton.addActionListener(new ActionListener() {
+		// Check username and password when log in button is pressed
+		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (CSVReadWrite.checkLogin("logins.csv", textField.getText(), textField_1.getText())) {
+				if (CSVReadWrite.checkLogin("logins.csv", userField.getText(), passField.getText())) {
 					dispose();
 					JOptionPane.showMessageDialog(null, "Log in succesfully!");
 					Demo1.loggedIn();

@@ -1,13 +1,46 @@
 import java.util.Date;
 
+/**
+ * Date: 11/19/21
+ * Application class used to represent an app on the app store.
+ * @author - Hiep Cao
+ * @author - Abigail Pease
+ * @author - Kenten Egbert
+ * @author - Caleb McConnell
+ * 
+ */
 public class Application {
+    /**
+     * Application name
+     */
 	private String name;
+	/**
+	 * Organization which created the application
+	 */
 	private String organization;
+	/**
+	 * Current version of the application
+	 */
 	private String version;
+	/**
+	 * An external link to the application's website
+	 */
 	private String externalLink;
+	/**
+	 * Application description
+	 */
 	private String description;
+	/**
+	 * Price of the application measured in dollars
+	 */
 	private double price;
+	/**
+	 * The platform of the application, such as iOS, Android, Windows, or Linux
+	 */
 	private String platform;
+	/**
+	 * The date the application was added to BrowseApp
+	 */
 	private Date dateAdded;
 	
 	/**

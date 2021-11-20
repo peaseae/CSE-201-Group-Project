@@ -25,9 +25,20 @@ import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+/**
+ * Date: 11/19/21
+ * Class used to run an app store GUI and interact with other classes
+ * @author - Hiep Cao
+ * @author - Abigail Pease
+ * @author - Kenten Egbert
+ * @author - Caleb McConnell
+ * 
+ */
 public class Demo1 {
 	@SuppressWarnings("deprecation")
+	/**
+	 * Array of apps that appear on the search page
+	 */
 	public static ArrayList<Application> apps = new ArrayList<Application>(){{
 		add(new Application("Compass", "Explorers Inc.", "2.0", "http://compass.com", "An app that works as a compass.", 0.99, "iOS", new Date(2011, 12, 29)));
 		add(new Application("Money Transfer", "29th Bank", "1.3.4", "http://bank29.com/app", "Allows you to transfer money to a friend.", 0.00, "Android", new Date(2018, 2, 20)));
@@ -42,9 +53,21 @@ public class Demo1 {
 		add(new Application("Mountain Climber Expert Challenge", "Extreme Games", "4.5.3", "http://extremegames.com/climb", "Challenge yourself and compare your rank to your friends! Only the strongest will make it to the top. Download now to find out if you have what it takes to become king of the mountain!", 1.99, "iOS", new Date(2018, 9, 7)));
 	}};
 
+	/**
+	 * The frame containing the GUI
+	 */
 	private static JFrame frame;
+	/**
+	 * The text field which takes in values to search for
+	 */
 	private static JTextField searchField;
+	/**
+	 * An arraylist of applications resulting from the search
+	 */
 	public static ArrayList<Application> output = new ArrayList<Application>();
+	/**
+	 * Boolean to keep track of whether the user has logged in
+	 */
 	public static boolean hasLogin = false;
 	
 	/**
